@@ -27,7 +27,13 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
         duration = st.slider("Thời gian vay dự kiến (tháng)", 6, 60, 12)
 
     if st.button("🔍 Phân tích & tư vấn"):
-        df_rates = pd.read_csv("data/interest_rates.csv")
+        import os
+       if os.path.exists("data/interest_rates.xlsx"):
+        df_rates = pd.read_excel("data/interest_rates.xlsx")
+       else:
+        st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
+        df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
+
         result = recommend_packages(income, expenses, debt, investment_amount, duration, df_rates)
         st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
         st.dataframe(result)
