@@ -64,11 +64,11 @@ if uploaded_file:
 
         
         # Ghi đè lại file trong thư mục data
-        df.to_csv("data/interest_rates.csv", index=False)
+        df.to_csv("data/interest_rates.xlsx", index=False)
         st.success(f"✅ Dữ liệu đã được cập nhật (mã hóa: {encoding_used}).")
     
     st.subheader("📈 Lãi suất hiện tại:")
-    df_rates = pd.read_csv("data/interest_rates.csv")
+    df_rates = pd.read_csv("data/interest_rates.xlsx")
     st.dataframe(df_rates)
 
     # Biểu đồ trực quan lãi suất Big4
