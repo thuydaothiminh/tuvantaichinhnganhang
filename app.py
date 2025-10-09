@@ -47,19 +47,15 @@ elif role == "🏦 Cán bộ Agribank":
     st.title("🏦 Quản lý lãi suất & gói vay Agribank")
 
     st.info("Nhập hoặc cập nhật dữ liệu lãi suất để hệ thống AI tư vấn chính xác hơn.")
-    uploaded_file = st.file_uploader("Tải file CSV lãi suất mới", type=["csv"])
-    
-    if uploaded_file:
-        import chardet
-        from io import StringIO
+    uploaded_file = st.file_uploader("Tải file lãi suất mới (Excel)", type=["xlsx", "xls"])
+if uploaded_file:
+    try:
+        df = pd.read_excel(uploaded_file)
+        df.to_excel("data/interest_rates.xlsx", index=False)
+        st.success("✅ Dữ liệu Excel đã được cập nhật thành công.")
+    except Exception as e:
+        st.error(f"❌ Lỗi khi đọc file Excel: {e}")
 
-        # Đọc toàn bộ dữ liệu gốc để phát hiện mã hóa
-        raw_data = uploaded_file.read()
-        detected = chardet.detect(raw_data)
-        encoding_used = detected["encoding"] if detected["encoding"] else "utf-8"
-
-        # Đọc lại file CSV với mã hóa phù hợp
-        df = pd.read_csv(StringIO(raw_data.decode(encoding_used)))
         
         # Ghi đè lại file trong thư mục data
         df.to_csv("data/interest_rates.csv", index=False)
