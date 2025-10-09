@@ -1,25 +1,7 @@
-# Cơ bản cho Streamlit App
 streamlit>=1.38.0
 pandas>=2.2.2
 numpy>=1.26.4
-
-# Đồ họa & trực quan (nếu trò mở rộng biểu đồ dòng tiền, so sánh lãi suất)
 plotly>=5.24.0
 altair>=5.3.0
-
-# Phân tích & xử lý dữ liệu
-scikit-learn>=1.5.0
-prophet>=1.1.5  # (tùy chọn: nếu trò thêm mô-đun dự báo mùa vụ)
-
-# Tích hợp AI (nếu muốn gọi API ChatGPT)
-openai>=1.12.0
-
-# Hỗ trợ automation và export báo cáo PDF
-python-docx>=1.1.0
-fpdf2>=2.7.9
-
-# Xử lý dữ liệu CSV và tương tác hệ thống
 requests>=2.32.3
-
-# Bảo mật & môi trường
 python-dotenv>=1.0.1
