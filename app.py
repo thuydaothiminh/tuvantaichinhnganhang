@@ -49,7 +49,18 @@ elif role == "🏦 Cán bộ Agribank":
     st.info("Nhập hoặc cập nhật dữ liệu lãi suất để hệ thống AI tư vấn chính xác hơn.")
     uploaded_file = st.file_uploader("Tải file CSV lãi suất mới", type=["csv"])
     if uploaded_file:
-        df = pd.read_csv(uploaded_file)
+        import chardet
+
+# Phát hiện mã hóa file tự động
+raw_data = uploaded_file.read()
+detected = chardet.detect(raw_data)
+encoding_used = detected["encoding"] if detected["encoding"] else "utf-8"
+
+# Đọc file với mã hóa được phát hiện
+from io import StringIO
+uploaded_file.seek(0)
+df = pd.read_csv(StringIO(raw_data.decode(encoding_used)))
+
         df.to_csv("data/interest_rates.csv", index=False)
         st.success("✅ Dữ liệu đã được cập nhật.")
 
