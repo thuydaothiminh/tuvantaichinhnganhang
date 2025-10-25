@@ -31,23 +31,23 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
         if os.path.exists("data/interest_rates.xlsx"):
          df_rates = pd.read_excel("data/interest_rates.xlsx")
         else:
-        st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
-        df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
+            st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
+            df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
 
-        result = recommend_packages(income, expenses, debt, investment_amount, duration, df_rates)
-        st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
-        st.dataframe(result)
+            result = recommend_packages(income, expenses, debt, investment_amount, duration, df_rates)
+            st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
+            st.dataframe(result)
 
-        # --- Biểu đồ so sánh lãi suất Big4 ---
-        fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
+            # --- Biểu đồ so sánh lãi suất Big4 ---
+            fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
                      color="Ngân hàng", text="Lãi suất (%)",
                      title="So sánh lãi suất giữa Big4 ngân hàng")
-        fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
-        fig.update_layout(yaxis_title="Lãi suất (%)", xaxis_title="Ngân hàng", showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+            fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
+            fig.update_layout(yaxis_title="Lãi suất (%)", xaxis_title="Ngân hàng", showlegend=False)
+            st.plotly_chart(fig, use_container_width=True)
 
-        advice_text = ai_advice(income, expenses, debt, investment_goal, investment_amount, duration, df_rates)
-        st.markdown(f"### 🤖 Lời khuyên AI:\n{advice_text}")
+            advice_text = ai_advice(income, expenses, debt, investment_goal, investment_amount, duration, df_rates)
+            st.markdown(f"### 🤖 Lời khuyên AI:\n{advice_text}")
 
 elif role == "🏦 Cán bộ Agribank":
     st.title("🏦 Quản lý lãi suất & gói vay Agribank")
