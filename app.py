@@ -28,9 +28,9 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
 
     if st.button("🔍 Phân tích & tư vấn"):
         import os
-       if os.path.exists("data/interest_rates.xlsx"):
-        df_rates = pd.read_excel("data/interest_rates.xlsx")
-       else:
+        if os.path.exists("data/interest_rates.xlsx"):
+         df_rates = pd.read_excel("data/interest_rates.xlsx")
+        else:
         st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
         df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
 
