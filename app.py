@@ -69,7 +69,7 @@ if uploaded_file:
         st.success(f"✅ Dữ liệu đã được cập nhật (mã hóa: {encoding_used}).")
     
     st.subheader("📈 Lãi suất hiện tại:")
-    df_rates = pd.read_csv("data/interest_rates.xlsx")
+    df_rates = pd.read_excel("data/interest_rates.xlsx")
     st.dataframe(df_rates)
 
     # Biểu đồ trực quan lãi suất Big4
