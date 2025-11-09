@@ -3,10 +3,6 @@ import pandas as pd
 import sys, os
 import plotly.express as px
 import chardet
-raw_data = uploaded_file.read()
-encoding = chardet.detect(raw_data)['encoding']
-df = pd.read_excel(io.BytesIO(raw_data), engine="openpyxl")
-
 
 # Bảo đảm Python nhận diện thư mục utils
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -33,6 +29,9 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
 
     if st.button("🔍 Phân tích & tư vấn"):
         import os
+        raw_data = uploaded_file.read()
+        encoding = chardet.detect(raw_data)['encoding']
+        df = pd.read_excel(io.BytesIO(raw_data), engine="openpyxl")
         if os.path.exists("data/interest_rates.xlsx"):
          df_rates = pd.read_excel("data/interest_rates.xlsx")
         else:
