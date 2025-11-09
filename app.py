@@ -28,17 +28,57 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
         duration = st.slider("Thời gian vay dự kiến (tháng)", 6, 60, 12)
 
     if st.button("🔍 Phân tích & tư vấn"):
-        import os       
-        if os.path.exists("data/interest_rates.xlsx"):
-         df_rates = pd.read_excel("data/interest_rates.xlsx")
-        else:
-            st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
-            df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
+        #import os       
+        #if os.path.exists("data/interest_rates.xlsx"):
+        # df_rates = pd.read_excel("data/interest_rates.xlsx")
+        #else:
+        #    st.warning("⚠️ Chưa có file lãi suất. Vui lòng upload file Excel để bắt đầu.")
+        #    df_rates = pd.DataFrame(columns=["Ngân hàng", "Sản phẩm vay", "Lãi suất (%)", "Ghi chú"])
 
-            result = recommend_packages(income, expenses, debt, investment_amount, duration, df_rates)
-            st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
-            st.dataframe(result)
+        #    result = recommend_packages(income, expenses, debt, investment_amount, duration, df_rates)
+        #    st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
+        #    st.dataframe(result)
 
+income = st.number_input("💰 Thu nhập hàng tháng (VNĐ):", min_value=0, step=1000000)
+expenses = st.number_input("🧾 Chi tiêu hàng tháng (VNĐ):", min_value=0, step=500000)
+debt = st.number_input("💳 Tổng nợ phải trả (VNĐ):", min_value=0, step=1000000)
+goal = st.selectbox("🎯 Mục tiêu tài chính:", ["Tích lũy", "Đầu tư", "Mua nhà", "Trả nợ", "Học tập", "Nghỉ hưu"])
+
+# -----------------------
+# 2️⃣ XỬ LÝ LOGIC GỢI Ý
+# -----------------------
+if st.button("🔍 Phân tích & Gợi ý bằng AI"):
+    st.subheader("📊 Kết quả phân tích tài chính cá nhân")
+
+    # Tính toán cơ bản
+    savings_rate = round(((income - expenses) / income) * 100, 2) if income > 0 else 0
+    debt_ratio = round((debt / income) * 100, 2) if income > 0 else 0
+
+    # Gợi ý tỉ lệ khuyến nghị
+    if savings_rate < 10:
+        suggestion = "💡 Mức tiết kiệm còn thấp. Hãy xem xét cắt giảm chi tiêu hoặc tăng thu nhập phụ."
+    elif savings_rate < 25:
+        suggestion = "✅ Mức tiết kiệm khá ổn. Nên bắt đầu gửi tiết kiệm có kỳ hạn hoặc đầu tư an toàn."
+    else:
+        suggestion = "🏆 Tuyệt vời! Bạn có thể xem xét các gói đầu tư dài hạn hoặc trái phiếu Agribank."
+
+    # Gợi ý sản phẩm Agribank
+    if goal == "Tích lũy":
+        product = "🎁 Gợi ý: Gói tiết kiệm linh hoạt Agribank – Lãi suất ~5.5%/năm."
+    elif goal == "Đầu tư":
+        product = "📈 Gợi ý: Gói đầu tư Agribank – Cổ phiếu ngân hàng & trái phiếu doanh nghiệp uy tín."
+    elif goal == "Mua nhà":
+        product = "🏠 Gợi ý: Vay mua nhà Agribank – Lãi suất ưu đãi chỉ từ 6.5%/năm."
+    elif goal == "Trả nợ":
+        product = "🧾 Gợi ý: Gói tái cấu trúc nợ – Gia hạn 6–12 tháng, lãi suất hỗ trợ thấp hơn 1.2%."
+    else:
+        product = "🌱 Gợi ý: Gói tiết kiệm hưu trí thông minh – tích lũy an toàn, lãi suất hấp dẫn."
+
+    st.write(f"**Tỷ lệ tiết kiệm hiện tại:** {savings_rate}%")
+    st.write(f"**Tỷ lệ nợ trên thu nhập:** {debt_ratio}%")
+    st.success(suggestion)
+    st.info(product)
+        
             # --- Biểu đồ so sánh lãi suất Big4 ---
             fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
                      color="Ngân hàng", text="Lãi suất (%)",
