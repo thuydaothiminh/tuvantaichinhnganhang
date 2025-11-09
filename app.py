@@ -79,16 +79,16 @@ if st.button("🔍 Phân tích & Gợi ý bằng AI"):
     st.success(suggestion)
     st.info(product)
         
-            # --- Biểu đồ so sánh lãi suất Big4 ---
-            fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
-                     color="Ngân hàng", text="Lãi suất (%)",
-                     title="So sánh lãi suất giữa Big4 ngân hàng")
-            fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
-            fig.update_layout(yaxis_title="Lãi suất (%)", xaxis_title="Ngân hàng", showlegend=False)
-            st.plotly_chart(fig, use_container_width=True)
+# --- Biểu đồ so sánh lãi suất Big4 ---
+fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
+    color="Ngân hàng", text="Lãi suất (%)",
+    title="So sánh lãi suất giữa Big4 ngân hàng")
+fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
+fig.update_layout(yaxis_title="Lãi suất (%)", xaxis_title="Ngân hàng", showlegend=False)
+st.plotly_chart(fig, use_container_width=True)
 
-            advice_text = ai_advice(income, expenses, debt, investment_goal, investment_amount, duration, df_rates)
-            st.markdown(f"### 🤖 Lời khuyên AI:\n{advice_text}")
+advice_text = ai_advice(income, expenses, debt, investment_goal, investment_amount, duration, df_rates)
+st.markdown(f"### 🤖 Lời khuyên AI:\n{advice_text}")
 
 elif role == "🏦 Cán bộ Agribank":
     st.title("🏦 Quản lý lãi suất & gói vay Agribank")
