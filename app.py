@@ -28,10 +28,7 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
         duration = st.slider("Thời gian vay dự kiến (tháng)", 6, 60, 12)
 
     if st.button("🔍 Phân tích & tư vấn"):
-        import os
-        raw_data = uploaded_file.read()
-        encoding = chardet.detect(raw_data)['encoding']
-        df = pd.read_excel(io.BytesIO(raw_data), engine="openpyxl")
+        import os       
         if os.path.exists("data/interest_rates.xlsx"):
          df_rates = pd.read_excel("data/interest_rates.xlsx")
         else:
