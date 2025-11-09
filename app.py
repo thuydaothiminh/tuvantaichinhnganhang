@@ -39,10 +39,10 @@ if role == "👨‍👩‍👧‍👦 Khách hàng":
         #    st.subheader("📊 Gợi ý tài chính & gói vay phù hợp:")
         #    st.dataframe(result)
 
-income = st.number_input("💰 Thu nhập hàng tháng (VNĐ):", min_value=0, step=1000000)
-expenses = st.number_input("🧾 Chi tiêu hàng tháng (VNĐ):", min_value=0, step=500000)
-debt = st.number_input("💳 Tổng nợ phải trả (VNĐ):", min_value=0, step=1000000)
-goal = st.selectbox("🎯 Mục tiêu tài chính:", ["Tích lũy", "Đầu tư", "Mua nhà", "Trả nợ", "Học tập", "Nghỉ hưu"])
+        income = st.number_input("💰 Thu nhập hàng tháng (VNĐ):", min_value=0, step=1000000)
+        expenses = st.number_input("🧾 Chi tiêu hàng tháng (VNĐ):", min_value=0, step=500000)
+        debt = st.number_input("💳 Tổng nợ phải trả (VNĐ):", min_value=0, step=1000000)
+        goal = st.selectbox("🎯 Mục tiêu tài chính:", ["Tích lũy", "Đầu tư", "Mua nhà", "Trả nợ", "Học tập", "Nghỉ hưu"])
 
 # -----------------------
 # 2️⃣ XỬ LÝ LOGIC GỢI Ý
