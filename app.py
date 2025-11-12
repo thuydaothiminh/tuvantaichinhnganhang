@@ -1,3 +1,16 @@
+import streamlit as st
+import pandas as pd
+import sys, os
+import plotly.express as px
+import chardet
+
+# Bảo đảm Python nhận diện thư mục utils
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from utils.financial_calc import recommend_packages
+from utils.ai_advisor import ai_advice
+
+st.set_page_config(page_title="AI Tư vấn tài chính gia đình", layout="wide")
+
 # --- Sidebar lựa chọn vai trò ---
 role = st.sidebar.radio("Bạn là:", ["👨‍👩‍👧‍👦 Khách hàng", "🏦 Cán bộ Agribank"])
 
@@ -68,3 +81,12 @@ elif role == "🏦 Cán bộ Agribank":
         st.subheader("📈 Lãi suất hiện tại:")
         df_rates = pd.read_excel("data/interest_rates.xlsx")
         st.dataframe(df_rates)
+
+    # Biểu đồ trực quan lãi suất Big4
+    import plotly.express as px
+    fig = px.bar(df_rates, x="Ngân hàng", y="Lãi suất (%)",
+                 color="Ngân hàng", text="Lãi suất (%)",
+                 title="Biểu đồ lãi suất các ngân hàng")
+    fig.update_traces(texttemplate='%{text:.2f}%', textposition='outside')
+    st.plotly_chart(fig, use_container_width=True)
+
