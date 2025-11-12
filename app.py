@@ -90,7 +90,7 @@ st.plotly_chart(fig, use_container_width=True)
 advice_text = ai_advice(income, expenses, debt, investment_goal, investment_amount, duration, df_rates)
 st.markdown(f"### 🤖 Lời khuyên AI:\n{advice_text}")
 
-    elif role == "🏦 Cán bộ Agribank":
+elif role == "🏦 Cán bộ Agribank":
         st.title("🏦 Quản lý lãi suất & gói vay Agribank")
 
         st.info("Nhập hoặc cập nhật dữ liệu lãi suất để hệ thống AI tư vấn chính xác hơn.")
