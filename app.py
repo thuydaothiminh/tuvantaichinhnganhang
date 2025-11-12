@@ -4,6 +4,13 @@ import sys, os
 import plotly.express as px
 import chardet
 
+df_rates = pd.DataFrame({
+    "Ngân hàng": ["Agribank", "Vietcombank", "VietinBank", "BIDV"],
+    "Sản phẩm vay": ["Tiêu dùng", "Mua nhà", "SXKD", "Đầu tư"],
+    "Lãi suất (%)": [6.5, 6.7, 6.6, 6.8],
+    "Ghi chú": ["Ưu đãi 2025", "Ổn định", "Doanh nghiệp", "Cá nhân"]
+})
+
 # Bảo đảm Python nhận diện thư mục utils
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from utils.financial_calc import recommend_packages
